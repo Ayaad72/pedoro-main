@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  overflow: hidden;
+  cursor: none; /* Hide default cursor */
+}
+
+.pedronomics-parent {
+  color: greenyellow;
+  background: linear-gradient(
+    to bottom,
+    rgba(65, 206, 132, 0) 0%,
+    rgba(65, 206, 132, 0.64) 64%,
+    rgba(65, 206, 132, 1) 100%
+  );
+}
+.hero-bg {
+  background: linear-gradient(
+      180deg,
+      rgba(34, 197, 94, 0.632) 0%,
+      rgba(34, 197, 94, 0.79) 40%,
+      rgba(255, 255, 255, 0.984) 100%
+    ),
+    url("/pedro-banner.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.supply-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.total-supply-bg {
+  background: linear-gradient(to top, #99999910 25%, #ffffff 100%);
+}
+.vertical-text {
+  background: #f0f0f0;
+  background: linear-gradient(to right, #f0f0f0 0%, #d38a59 50%, #f0f0f0 100%);
+  -webkit-text-fill-color: transparent;
+}
+.total-supply-bg-inner {
+  background: linear-gradient(to top, #99999916 25%, #efefefd4 100%);
+  box-shadow: 0 32px 25px -47px rgb(0 0 0 / 0.1),
+    11px -9px 47px 12px rgb(0 0 0 / 0.1);
+}
+.metrix-container {
+  background: linear-gradient(to top, #9999992e 0%, #ffffff 100%);
+}
+
+.roadmap-container {
+  background: linear-gradient(to bottom, #ffffff 0%, #c6c6c6 64%, #ffffff 100%);
+}
+.roadmap-container {
+  padding: 10rem 15rem 10rem 0px;
+}
+
+.banner-text {
+  font-size: 5.5rem !important;
+}
+.tale-of-perdro-wrapper h2 {
+  line-height: 1.2;
+}
+.tale-of-perdro-wrapper p {
+  line-height: 1.5;
+}
+.main-text {
+  padding: 0 1rem;
+  margin-top: 1.5rem;
+}
+.pedronomics-container {
+  background: linear-gradient(
+    to bottom,
+    rgba(65, 206, 132, 0) 0%,
+    rgba(65, 206, 132, 0.64) 64%,
+    rgba(65, 206, 132, 1) 100%
+  );
+}
+
+@media (max-width: 1024px) {
+  .banner-text {
+    font-size: 1.9rem !important;
+  }
+  .roadmap-container {
+    padding: 6rem 4rem 5rem 0px;
+  }
+  .nav-logo {
+    width: 70px;
+    position: relative;
+    right: 34px;
+    height: 70px;
+  }
+  .hamburger-icon {
+    position: relative;
+    left: 34px;
+  }
+}
+/* Taileind css font usage like this font-[family-name:var(--font-pixelify-sans)]  */
