@@ -74,7 +74,7 @@ export const Header = function Navbar() {
             <Drawer.Content className="bg-[#7F1911] flex flex-col items-center rounded-t-[10px] h-full mt-24 fixed bottom-0 left-0 right-0">
               <div className="p-4 bg-[#7F1911] rounded-t-[10px] w-full">
                 <Drawer.Title className="sr-only">
-                  dsadsada dasdasdasda
+                  dsadsada sdfsdfdsf
                 </Drawer.Title>
                 <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-gray-300 mb-8" />
                 <div className="flex flex-col gap-4">
