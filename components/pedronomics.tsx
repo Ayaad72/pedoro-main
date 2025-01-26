@@ -4,7 +4,7 @@ export default function Pedronomics() {
       <div className="container mx-auto px-4 md:px-6 lg:px-0 w-[80%] lg:w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center pb-28 lg:pb-16 border-b-2 border-white lg:border-[#41CE84]">
           <h1 className="text-[#41CE84] text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight font-[family-name:var(--font-pixelify-sans)]">
-            dsfsdfsdfsdfs
+            fsdfsdfsd
           </h1>
           <p className="text-[#41CE84] text-lg md:text-xl lg:text-2xl leading-relaxed font-light">
             PedroCoin's hybrid tokenomics strategy ensures sustainability,
