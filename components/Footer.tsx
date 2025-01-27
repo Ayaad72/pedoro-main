@@ -20,7 +20,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="text-center mb-0">
           <h2 className="font-[family-name:var(--font-pixelify-sans)]  text-4xl md:text-6xl font-bold text-white mb-4">
-            Join sdfsdfsd Pedro Party
+            Join sdfsdfsd dsfsdfs Party
           </h2>
           <p className="text-white/80 max-w-2xl mx-auto text-lg font-[family-name:var(--font-manrope)] ">
             Connect with meme lovers and crypto enthusiasts across the globe and
