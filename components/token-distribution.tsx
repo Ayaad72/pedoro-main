@@ -78,7 +78,6 @@ export default function TokenDistribution() {
         intervals.push(interval);
       });
 
-      // Cleanup function to clear intervals
       return () => {
         intervals.forEach((interval) => clearInterval(interval));
       };
