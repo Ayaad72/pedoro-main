@@ -23,8 +23,8 @@ export default function Footer() {
             Join the Pedro Party
           </h2>
           <p className="text-white/80 max-w-2xl mx-auto text-lg font-[family-name:var(--font-manrope)] ">
-            Connect with meme sadsadas dfsdfsdfs ohhfjshhsjut sdfsdfsdfsdf
-            across the globe and be adasddsa of the awkward revolution
+            Connect with meme lovers and crypto enthusiasts across the globe and
+            be part of the awkward revolution
           </p>
 
           {/* Social Links */}
