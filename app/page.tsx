@@ -59,7 +59,9 @@ export default function Home() {
         </div>
 
         <div className="relative bg-[#fff]">
-          <MarqueegBanner />
+          <div className="transform rotate-6">
+            <MarqueegBanner />
+          </div>
           <div
             id="about"
             className="max-w-[1440px] flex flex-col-reverse md:flex-row items-center justify-between gap-12 md:gap-16 mx-auto"
@@ -95,7 +97,9 @@ export default function Home() {
           </div>
         </div>
         <Roadmap />
-        <MarqueegBanner />
+        <div className="transform rotate-2">
+          <MarqueegBanner />
+        </div>
         <Footer />
       </div>
     </main>
