@@ -62,7 +62,7 @@ export default function Home() {
           <MarqueegBanner />
           <div
             id="about"
-            className="w-[80%] flex flex-col-reverse md:flex-row items-center justify-between gap-12 md:gap-16 mx-auto"
+            className="max-w-[1440px] flex flex-col-reverse md:flex-row items-center justify-between gap-12 md:gap-16 mx-auto"
           >
             <div className="tale-of-perdro-wrapper text-center md:text-left max-w-xl">
               <h2 className=" text-3xl md:text-5xl font-bold text-[#4A1D1D] mb-6 font-[family-name:var(--font-pixelify-sans)] ">
@@ -90,7 +90,7 @@ export default function Home() {
         <WhyPedroCoin />
         <div id="tokenomics" className="pedronomics-container">
           <Pedronomics />
-          <div className="supply-container relative matrics-container flex items-end justify-center gap-[2rem]">
+          <div className="relative flex items-end justify-center gap-[2rem]">
             <TokenDistribution />
           </div>
         </div>

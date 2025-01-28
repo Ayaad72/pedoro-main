@@ -1,4 +1,5 @@
-// import Marquee from "react-fast-marquee";
+// Import the necessary modules
+import { motion } from "framer-motion";
 
 export default function Roadmap() {
   const phases = [
@@ -36,7 +37,7 @@ export default function Roadmap() {
   return (
     <div
       id="roadmap"
-      className="flex justify-end min-h-screen bg-[#fafafa]  relative overflow-hidden"
+      className="flex justify-end min-h-screen bg-[#fafafa] relative overflow-hidden"
     >
       <div className="w-full">
         {/* Header Text */}
@@ -47,8 +48,17 @@ export default function Roadmap() {
 
         {/* Main Content Container */}
         <div className="flex flex-col md:flex-row gap-8 md:gap-16 relative">
-          {/* <Marquee direction="up" speed={30}> */}
-          <div className="v-text  md:block absolute left-[9rem] bottom-0 height-[100%]">
+          {/* Animated Vertical Text */}
+          <motion.div
+            className="v-text md:block absolute left-[9rem] bottom-0"
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{
+              duration: 1.5,
+              ease: "easeInOut",
+            }}
+            viewport={{ amount: 0.3 }} // Trigger animation when 50% of the text is in view
+          >
             <div
               className="v-text-inner rotate-360 whitespace-nowrap [writing-mode:vertical-rl] text-8xl font-bold tracking-tight bg-clip-text text-transparent"
               style={{
@@ -60,18 +70,17 @@ export default function Roadmap() {
             >
               THE ROAD TO PEDROFICATION
             </div>
-          </div>
-          {/* </Marquee> */}
+          </motion.div>
 
           {/* Timeline Container */}
-          <div className="flex-grow relative">
+          <div className="flex-grow relative max-w-[1440px] mx-auto">
             {/* Timeline Line */}
             <div className="v-line absolute right-[15.2rem] top-0 bottom-0 w-[2px] bg-[#8B1D1D]" />
 
             {/* Phases */}
-            <div className="roadmap-container space-y-24 flex flex-col items-end w-[70%] float-right ">
+            <div className="roadmap-container space-y-24 flex flex-col items-end w-[70%] float-right">
               {phases.map((phase, index) => (
-                <div key={index} className="relative w-full text-right ">
+                <div key={index} className="relative w-full text-right">
                   {/* Timeline Dot */}
                   <div className="absolute right-0 w-3 h-3 rounded-full bg-[#8B1D1D] translate-x-[2px] translate-y-[20px]" />
 

@@ -29,11 +29,6 @@ body {
   background-repeat: no-repeat;
 }
 
-.supply-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .total-supply-bg {
   background: linear-gradient(to top, #99999910 25%, #ffffff 100%);
 }

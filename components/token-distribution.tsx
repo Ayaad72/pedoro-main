@@ -1,75 +1,130 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 export default function TokenDistribution() {
-  const [mounted, setMounted] = useState(false);
+  const [ref, inView] = useInView({ threshold: 0.2 }); // Detect when in view
+  const controls = useAnimation(); // Control animations programmatically
+  const [counts, setCounts] = useState([0, 0, 0, 0]); // Store counts for each bar
 
+  const bars = [
+    {
+      percentage: 55,
+      height: 500,
+      title: "Liquidity Pool",
+      coins: 550000000,
+      description: "Locked liquidity ensures market stability",
+    },
+    {
+      percentage: 25,
+      height: 350,
+      title: "Ecosystem Utility",
+      coins: 250000000,
+      description: "Staking rewards, governance, and transaction",
+    },
+    {
+      percentage: 15,
+      height: 180,
+      title: "Team & Advisors",
+      coins: 150000000,
+      description: "Locked for 12-24 months with gradual vesting",
+    },
+    {
+      percentage: 5,
+      height: 100,
+      title: "Marketing & Partnerships",
+      coins: 50000000,
+      description: "Meme campaigns and strategic collaborations",
+    },
+  ];
+
+  // Reset counts when out of view
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (!inView) {
+      setCounts([0, 0, 0, 0]);
+      controls.start("hidden");
+    }
+  }, [inView, controls]);
 
-  if (!mounted) return null;
+  // Trigger animations when the component comes into view
+  useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+
+      // Clear any existing intervals
+      const intervals: NodeJS.Timeout[] = [];
+
+      bars.forEach((bar, index) => {
+        setCounts((prev) => {
+          const updated = [...prev];
+          updated[index] = 0;
+          return updated;
+        });
+
+        const interval = setInterval(() => {
+          setCounts((prev) => {
+            const updated = [...prev];
+            if (updated[index] < bar.percentage) {
+              updated[index] += 1; // Increment the count
+            } else {
+              clearInterval(interval); // Stop the timer once the percentage is reached
+            }
+            return updated;
+          });
+        }, 20); // Speed of the counter
+
+        intervals.push(interval);
+      });
+
+      // Cleanup function to clear intervals
+      return () => {
+        intervals.forEach((interval) => clearInterval(interval));
+      };
+    }
+  }, [inView, controls]);
 
   return (
-    <div className="relative min-h-screen w-full bg-gradient-to-br from-emerald-300 to-green-300">
-      <div className="flex flex-col md:flex-row justify-center items-center p-4">
+    <div ref={ref} className="relative  bg-gradient-to-br ">
+      <div className="flex flex-col md:flex-row justify-center items-center ">
         <div className="flex flex-col items-center md:flex-row md:items-end gap-6 md:max-w-4xl w-full">
-          <div className="flex flex-col justify-end w-full md:w-auto">
-            <div className="mb-4 space-y-1">
-              <div className="text-5xl font-bold text-white">55%</div>
-              <div className="text-lg font-medium text-white">
-                Liquidity Pool
-              </div>
-              <div className="text-sm text-white">550,000,000 coins</div>
-              <div className="max-w-[200px] text-xs text-white/90">
-                Locked liquidity ensures market stability
-              </div>
+          {bars.map((bar, index) => (
+            <div
+              key={index}
+              className="flex flex-col justify-end w-full md:w-auto"
+            >
+              <motion.div
+                className="mb-4 space-y-1"
+                initial={{ opacity: 0, y: 50 }}
+                animate={controls}
+                transition={{ delay: index * 0.3, duration: 0.6 }}
+                variants={{
+                  visible: { opacity: 1, y: 0 },
+                  hidden: { opacity: 0, y: 50 },
+                }}
+              >
+                <div className="text-5xl font-bold text-white">
+                  {counts[index]}%
+                </div>
+                <div className="text-lg font-medium text-white">
+                  {bar.title}
+                </div>
+                <div className="text-sm text-white">
+                  {bar.coins.toLocaleString()} coins
+                </div>
+                <div className="max-w-[200px] text-xs text-white/90">
+                  {bar.description}
+                </div>
+              </motion.div>
+              <motion.div
+                className="w-full md:w-[200px] bg-gradient-to-t from-[#9999992e] to-white"
+                initial={{ height: 0 }}
+                animate={inView ? { height: bar.height } : { height: 0 }}
+                transition={{ delay: index * 0.3 + 0.3, duration: 0.6 }}
+              />
             </div>
-            <div className="h-[500px] w-full md:w-[200px] bg-gradient-to-t from-[#9999992e] to-white" />
-          </div>
-
-          <div className="flex flex-col justify-end w-full md:w-auto">
-            <div className="mb-4 space-y-1">
-              <div className="text-5xl font-bold text-white">25%</div>
-              <div className="text-lg font-medium text-white">
-                Ecosystem Utility
-              </div>
-              <div className="text-sm text-white">250,000,000 coins</div>
-              <div className="max-w-[200px] text-xs text-white/90">
-                Staking rewards, governance, and transaction
-              </div>
-            </div>
-            <div className="h-[350px] w-full md:w-[200px] bg-gradient-to-t from-[#9999992e] to-white" />
-          </div>
-
-          <div className="flex flex-col justify-end w-full md:w-auto">
-            <div className="mb-4 space-y-1">
-              <div className="text-5xl font-bold text-white">15%</div>
-              <div className="text-lg font-medium text-white">
-                Team & Advisors
-              </div>
-              <div className="text-sm text-white">150,000,000 coins</div>
-              <div className="max-w-[200px] text-xs text-white/90">
-                Locked for 12-24 months with gradual vesting
-              </div>
-            </div>
-            <div className="h-[180px] w-full md:w-[200px] bg-gradient-to-t from-[#9999992e] to-white" />
-          </div>
-
-          <div className="flex flex-col justify-end w-full md:w-auto">
-            <div className="mb-4 space-y-1">
-              <div className="text-5xl font-bold text-white">5%</div>
-              <div className="text-lg font-medium text-white">
-                Marketing & Partnerships
-              </div>
-              <div className="text-sm text-white">50,000,000 coins</div>
-              <div className="max-w-[200px] text-xs text-white/90">
-                Meme campaigns and strategic collaborations
-              </div>
-            </div>
-            <div className="h-[100px] w-full md:w-[200px] bg-gradient-to-t from-[#9999992e] to-white" />
-          </div>
+          ))}
         </div>
 
         <div className="relative w-[600px] h-[600px] md:ml-8 hidden md:block">
