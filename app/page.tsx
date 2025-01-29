@@ -50,7 +50,7 @@ export default function Home() {
               className="text-white/90 text-lg md:text-xl mb-8 max-w-2xl mx-auto"
               {...fadeInUp}
             >
-              Where r and innovation unite on the Solana blockchain—join the
+              Where r and dssdsd unite on the Solana blockchain—join the
               community-driven revolution blending internet culture with
               cutting-edge crypto utility.
             </motion.p>
