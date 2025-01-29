@@ -1,9 +1,17 @@
-// Import the necessary modules
 import { motion, useInView } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
 export default function Roadmap() {
   const [disableAnimations, setDisableAnimations] = useState(false);
+  const phase1Ref = useRef(null);
+  const phase2Ref = useRef(null);
+  const phase3Ref = useRef(null);
+  const phase4Ref = useRef(null);
+
+  const phase1InView = useInView(phase1Ref, { once: false });
+  const phase2InView = useInView(phase2Ref, { once: false });
+  const phase3InView = useInView(phase3Ref, { once: false });
+  const phase4InView = useInView(phase4Ref, { once: false });
 
   useEffect(() => {
     const handleResize = () => {
@@ -55,7 +63,7 @@ export default function Roadmap() {
       <div className="w-full">
         {/* Header Text */}
         <h2 className="font-light pt-8 md:pt-16 text-[#8B1D1D] max-w-[600px] text-2xl md:text-4xl mx-auto mt-0 my-8 md:my-[6rem] text-center px-4">
-          PedroCoin's roadmap is a four-phase journey to create a fun and
+          PedroCoin&apos;s roadmap is a four-phase journey to create a fun and
           functional ecosystem:
         </h2>
 
@@ -94,68 +102,125 @@ export default function Roadmap() {
 
             {/* Phases */}
             <div className="roadmap-container space-y-12 md:space-y-24 flex flex-col w-full md:w-[70%] md:float-right">
-              {phases.map((phase, index) => {
-                const ref = useRef(null);
-                const isInView = useInView(ref, { once: false });
+              <motion.div
+                ref={phase1Ref}
+                className="relative w-full text-left md:text-right"
+                initial={{ opacity: 0, x: 100 }}
+                animate={
+                  phase1InView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }
+                }
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <div className="absolute left-[-2.15rem] md:left-auto md:right-0 w-3 h-3 rounded-full bg-[#8B1D1D] translate-y-[20px] md:translate-x-[2px]" />
+                <div className="roadmap-content pl-4 md:pl-0 md:pr-24">
+                  <div className="text-[#7F1911] font-bold mb-1 text-2xl md:text-3xl">
+                    {phases[0].number}
+                  </div>
+                  <div className="text-[#D38A59] text-lg md:text-3xl font-bold mb-3">
+                    {phases[0].title}
+                  </div>
+                  <div className="space-y-1">
+                    {phases[0].items.map((item, itemIndex) => (
+                      <p
+                        key={itemIndex}
+                        className="text-[#440C0A] text-sm md:text-base"
+                      >
+                        {item}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
 
-                const slideVariants = {
-                  hidden: {
-                    opacity: 0,
-                    x: 100,
-                    scale: 0.8,
-                  },
-                  visible: {
-                    opacity: 1,
-                    x: 0,
-                    scale: 1,
-                    transition: {
-                      duration: 0.8,
-                      delay: index * 0.2,
-                      ease: "easeOut",
-                    },
-                  },
-                };
+              <motion.div
+                ref={phase2Ref}
+                className="relative w-full text-left md:text-right"
+                initial={{ opacity: 0, x: 100 }}
+                animate={
+                  phase2InView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }
+                }
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <div className="absolute left-[-2.15rem] md:left-auto md:right-0 w-3 h-3 rounded-full bg-[#8B1D1D] translate-y-[20px] md:translate-x-[2px]" />
+                <div className="roadmap-content pl-4 md:pl-0 md:pr-24">
+                  <div className="text-[#7F1911] font-bold mb-1 text-2xl md:text-3xl">
+                    {phases[1].number}
+                  </div>
+                  <div className="text-[#D38A59] text-lg md:text-3xl font-bold mb-3">
+                    {phases[1].title}
+                  </div>
+                  <div className="space-y-1">
+                    {phases[1].items.map((item, itemIndex) => (
+                      <p
+                        key={itemIndex}
+                        className="text-[#440C0A] text-sm md:text-base"
+                      >
+                        {item}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
 
-                return (
-                  <motion.div
-                    ref={ref}
-                    key={index}
-                    className="relative w-full text-left md:text-right"
-                    initial={disableAnimations ? "visible" : "hidden"}
-                    animate={
-                      disableAnimations
-                        ? "visible"
-                        : isInView
-                        ? "visible"
-                        : "hidden"
-                    }
-                    variants={disableAnimations ? {} : slideVariants}
-                  >
-                    {/* Timeline Dot */}
-                    <div className="absolute left-[-2.15rem] md:left-auto md:right-0 w-3 h-3 rounded-full bg-[#8B1D1D] translate-y-[20px] md:translate-x-[2px]" />
+              <motion.div
+                ref={phase3Ref}
+                className="relative w-full text-left md:text-right"
+                initial={{ opacity: 0, x: 100 }}
+                animate={
+                  phase3InView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }
+                }
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <div className="absolute left-[-2.15rem] md:left-auto md:right-0 w-3 h-3 rounded-full bg-[#8B1D1D] translate-y-[20px] md:translate-x-[2px]" />
+                <div className="roadmap-content pl-4 md:pl-0 md:pr-24">
+                  <div className="text-[#7F1911] font-bold mb-1 text-2xl md:text-3xl">
+                    {phases[2].number}
+                  </div>
+                  <div className="text-[#D38A59] text-lg md:text-3xl font-bold mb-3">
+                    {phases[2].title}
+                  </div>
+                  <div className="space-y-1">
+                    {phases[2].items.map((item, itemIndex) => (
+                      <p
+                        key={itemIndex}
+                        className="text-[#440C0A] text-sm md:text-base"
+                      >
+                        {item}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
 
-                    {/* Content */}
-                    <div className="roadmap-content pl-4 md:pl-0 md:pr-24">
-                      <div className="text-[#7F1911] font-bold mb-1 text-2xl md:text-3xl">
-                        {phase.number}
-                      </div>
-                      <div className="text-[#D38A59] text-lg md:text-3xl font-bold mb-3">
-                        {phase.title}
-                      </div>
-                      <div className="space-y-1">
-                        {phase.items.map((item, itemIndex) => (
-                          <p
-                            key={itemIndex}
-                            className="text-[#440C0A] text-sm md:text-base"
-                          >
-                            {item}
-                          </p>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.div>
-                );
-              })}
+              <motion.div
+                ref={phase4Ref}
+                className="relative w-full text-left md:text-right"
+                initial={{ opacity: 0, x: 100 }}
+                animate={
+                  phase4InView ? { opacity: 1, x: 0 } : { opacity: 0, x: 100 }
+                }
+                transition={{ duration: 0.8, ease: "easeOut" }}
+              >
+                <div className="absolute left-[-2.15rem] md:left-auto md:right-0 w-3 h-3 rounded-full bg-[#8B1D1D] translate-y-[20px] md:translate-x-[2px]" />
+                <div className="roadmap-content pl-4 md:pl-0 md:pr-24">
+                  <div className="text-[#7F1911] font-bold mb-1 text-2xl md:text-3xl">
+                    {phases[3].number}
+                  </div>
+                  <div className="text-[#D38A59] text-lg md:text-3xl font-bold mb-3">
+                    {phases[3].title}
+                  </div>
+                  <div className="space-y-1">
+                    {phases[3].items.map((item, itemIndex) => (
+                      <p
+                        key={itemIndex}
+                        className="text-[#440C0A] text-sm md:text-base"
+                      >
+                        {item}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </div>

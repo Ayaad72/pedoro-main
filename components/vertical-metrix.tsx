@@ -26,8 +26,6 @@ export function VerticalMetrics({
     }
   }, [inView]);
 
-  const height = Math.round((percentage / 50) * 800);
-
   return (
     <div
       className="metrix-container relative w-64 overflow-hidden md:h-[300px] md:w-96 h-[800px]"

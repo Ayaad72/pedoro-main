@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Drawer } from "vaul";
+import Image from "next/image";
 
 export const Header = function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -14,12 +15,13 @@ export const Header = function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className=" p-12 m-12">
-              <img
+              <Image
                 className="nav-logo"
                 src="/pedro-logo.png"
                 alt="Logo"
                 height={100}
                 width={100}
+                priority
               />
             </Link>
           </div>
@@ -27,21 +29,21 @@ export const Header = function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8 font-[family-name:var(--font-manrope)] ">
             <Link
-              href="/about"
+              href="#about"
               className="text-white hover:text-gray-200 relative group transition-colors duration-200 text-sm font-[700]"
             >
               <span>About</span>
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-200"></span>
             </Link>
             <Link
-              href="/tokenomics"
+              href="#tokenomics"
               className="text-white hover:text-gray-200 relative group transition-colors duration-200 text-sm font-[700]"
             >
               <span>Tokenomics</span>
               <span className="absolute bottom-0 left-0 w-full h-0.5 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-200"></span>
             </Link>
             <Link
-              href="/roadmap"
+              href="#roadmap"
               className="text-white hover:text-gray-200 relative group transition-colors duration-200 text-sm font-[700]"
             >
               <span>Roadmap</span>
@@ -77,21 +79,21 @@ export const Header = function Navbar() {
                 <div className="mx-auto w-12 h-1.5 flex-shrink-0 rounded-full bg-gray-300 mb-8" />
                 <div className="flex flex-col gap-4">
                   <Link
-                    href="/about"
+                    href="#about"
                     className="block px-4 py-2 text-lg font-medium text-white hover:text-gray-200 transition-colors duration-200"
                     onClick={() => setIsOpen(false)}
                   >
                     About
                   </Link>
                   <Link
-                    href="/tokenomics"
+                    href="#tokenomics"
                     className="block px-4 py-2 text-lg font-medium text-white hover:text-gray-200 transition-colors duration-200"
                     onClick={() => setIsOpen(false)}
                   >
                     Tokenomics
                   </Link>
                   <Link
-                    href="/roadmap"
+                    href="#roadmap"
                     className="block px-4 py-2 text-lg font-medium text-white hover:text-gray-200 transition-colors duration-200"
                     onClick={() => setIsOpen(false)}
                   >

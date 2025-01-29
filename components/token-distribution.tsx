@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
@@ -7,69 +7,70 @@ export default function TokenDistribution() {
   const [ref, inView] = useInView({ threshold: 0.2 });
   const controls = useAnimation();
   const [counts, setCounts] = useState([0, 0, 0, 0]);
-  const [isMobile, setIsMobile] = useState(false);
+  const [animationStarted, setAnimationStarted] = useState(false);
+
+  const bars = useMemo(
+    () => [
+      {
+        percentage: 55,
+        height: 500,
+        title: "Liquidity Pool",
+        coins: 550000000,
+        description: "Locked liquidity ensures market stability",
+      },
+      {
+        percentage: 25,
+        height: 350,
+        title: "Ecosystem Utility",
+        coins: 250000000,
+        description: "Staking rewards, governance, and transaction",
+      },
+      {
+        percentage: 15,
+        height: 180,
+        title: "Team & Advisors",
+        coins: 150000000,
+        description: "Locked for 12-24 months with gradual vesting",
+      },
+      {
+        percentage: 5,
+        height: 100,
+        title: "Marketing & Partnerships",
+        coins: 50000000,
+        description: "Meme campaigns and strategic collaborations",
+      },
+    ],
+    []
+  );
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    if (inView && !animationStarted) {
+      controls.start("visible");
+      setAnimationStarted(true);
 
-  const bars = [
-    {
-      percentage: 55,
-      height: 500,
-      title: "Liquidity Pool",
-      coins: 550000000,
-      description: "Locked liquidity ensures market stability",
-    },
-    {
-      percentage: 25,
-      height: 350,
-      title: "Ecosystem Utility",
-      coins: 250000000,
-      description: "Staking rewards, governance, and transaction",
-    },
-    {
-      percentage: 15,
-      height: 180,
-      title: "Team & Advisors",
-      coins: 150000000,
-      description: "Locked for 12-24 months with gradual vesting",
-    },
-    {
-      percentage: 5,
-      height: 100,
-      title: "Marketing & Partnerships",
-      coins: 50000000,
-      description: "Meme campaigns and strategic collaborations",
-    },
-  ];
+      bars.forEach((bar, index) => {
+        let currentCount = 0;
+        const interval = setInterval(() => {
+          if (currentCount < bar.percentage) {
+            currentCount++;
+            setCounts((prev) => {
+              const newCounts = [...prev];
+              newCounts[index] = currentCount;
+              return newCounts;
+            });
+          } else {
+            clearInterval(interval);
+          }
+        }, 30);
+      });
+    }
 
-  useEffect(() => {
     if (!inView) {
       setCounts([0, 0, 0, 0]);
       controls.start("hidden");
+      setAnimationStarted(false);
     }
-  }, [inView, controls]);
-
-  useEffect(() => {
-    if (inView && !isMobile) {
-      controls.start("visible");
-      const intervals = bars.map((bar, index) => {
-        return setInterval(() => {
-          setCounts((prev) => {
-            const updated = [...prev];
-            if (updated[index] < bar.percentage) updated[index] += 1;
-            else clearInterval(intervals[index]);
-            return updated;
-          });
-        }, 20);
-      });
-      return () => intervals.forEach(clearInterval);
-    }
-  }, [inView, controls, isMobile]);
+  }, [inView, controls, animationStarted, bars]);
 
   return (
     <div ref={ref} className="relative bg-gradient-to-br">
@@ -83,7 +84,7 @@ export default function TokenDistribution() {
               <motion.div
                 className="mb-4 space-y-1"
                 initial={{ opacity: 0, y: 50 }}
-                animate={isMobile ? "visible" : controls}
+                animate={controls}
                 transition={{ delay: index * 0.3, duration: 0.6 }}
                 variants={{
                   visible: { opacity: 1, y: 0 },
@@ -106,9 +107,7 @@ export default function TokenDistribution() {
               <motion.div
                 className="w-full md:w-[200px] bg-gradient-to-t from-[#9999992e] to-white"
                 initial={{ height: 0 }}
-                animate={
-                  inView && !isMobile ? { height: bar.height } : { height: 0 }
-                }
+                animate={inView ? { height: bar.height } : { height: 0 }}
                 transition={{ delay: index * 0.3 + 0.3, duration: 0.6 }}
               />
             </div>

@@ -7,7 +7,7 @@ export default function Pedronomics() {
             PEDRONOMICS
           </h1>
           <p className="text-[#41CE84] text-lg md:text-xl lg:text-2xl leading-relaxed font-[400]">
-            PedroCoin's hybrid tokenomics strategy ensures sustainability,
+            PedroCoin&apos;s hybrid tokenomics strategy ensures sustainability,
             transparency, and trust.
           </p>
         </div>
