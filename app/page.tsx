@@ -59,7 +59,7 @@ export default function Home() {
         </div>
 
         <div className="relative bg-[#fff]">
-          <div className="transform rotate-6">
+          <div className="transform rotate-6 pt-12">
             <MarqueegBanner />
           </div>
           <div
@@ -97,7 +97,7 @@ export default function Home() {
           </div>
         </div>
         <Roadmap />
-        <div className="transform rotate-2">
+        <div>
           <MarqueegBanner />
         </div>
         <Footer />
