@@ -1,5 +1,6 @@
 "use client";
 import Pedronomics from "@/components/pedronomics";
+import Typical from "react-typical";
 import Roadmap from "@/components/road-map";
 import MarqueegBanner from "@/components/marquee-banner";
 import "./../app/globals.css";
@@ -34,12 +35,16 @@ export default function Home() {
             initial="initial"
             animate="animate"
           >
-            <motion.h1
-              className="banner-text text-4xl md:text-7xl font-title font-[family-name:var(--font-pixelify-sans)]  text-white mb-6"
-              {...fadeInUp}
-            >
-              Building the Future of Memes & Tokens with the Awkward Look
-            </motion.h1>
+            <h1 className="banner-text text-4xl md:text-7xl font-title font-[family-name:var(--font-pixelify-sans)] text-white mb-6">
+              <Typical
+                steps={[
+                  "Building the Future of Memes & Tokens with the Awkward Look",
+                  2000,
+                ]}
+                loop={1}
+                wrapper="span"
+              />
+            </h1>
 
             <motion.p
               className="text-white/90 text-lg md:text-xl mb-8 max-w-2xl mx-auto"
