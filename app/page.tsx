@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <main className="main-bg min-h-screen bg-gradient-to-b ">
       <div className="mx-auto" style={{ overflow: "hidden" }}>
-        <div className="hero-bg h-[85vh]">
+        <div className="hero-bg lg:h-[85vh] sm:h-auto">
           <Header />
           <motion.div
             className="main-text text-center max-w-6xl mx-auto mt-20 mb-32"

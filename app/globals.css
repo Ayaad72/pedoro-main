@@ -48,11 +48,13 @@ body {
 
 .roadmap-container {
   background: linear-gradient(to bottom, #ffffff 0%, #c6c6c6 64%, #ffffff 100%);
-}
-.roadmap-container {
   padding: 10rem 15rem 10rem 0px;
+  color: aqua;
 }
 
+.vertical-text {
+  background-color: #d38a59;
+}
 .banner-text {
   font-size: 5.5rem !important;
 }
@@ -91,6 +93,10 @@ body {
   .hamburger-icon {
     position: relative;
     left: 34px;
+  }
+  .roadmap-container {
+    margin-right: 12rem;
+    background-color: red;
   }
 }
 /* Taileind css font usage like this font-[family-name:var(--font-pixelify-sans)]  */

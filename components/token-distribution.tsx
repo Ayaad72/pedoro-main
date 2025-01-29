@@ -1,13 +1,20 @@
 "use client";
-
 import { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 export default function TokenDistribution() {
-  const [ref, inView] = useInView({ threshold: 0.2 }); // Detect when in view
-  const controls = useAnimation(); // Control animations programmatically
-  const [counts, setCounts] = useState([0, 0, 0, 0]); // Store counts for each bar
+  const [ref, inView] = useInView({ threshold: 0.2 });
+  const controls = useAnimation();
+  const [counts, setCounts] = useState([0, 0, 0, 0]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const bars = [
     {
@@ -40,7 +47,6 @@ export default function TokenDistribution() {
     },
   ];
 
-  // Reset counts when out of view
   useEffect(() => {
     if (!inView) {
       setCounts([0, 0, 0, 0]);
@@ -48,45 +54,26 @@ export default function TokenDistribution() {
     }
   }, [inView, controls]);
 
-  // Trigger animations when the component comes into view
   useEffect(() => {
-    if (inView) {
+    if (inView && !isMobile) {
       controls.start("visible");
-
-      // Clear any existing intervals
-      const intervals: NodeJS.Timeout[] = [];
-
-      bars.forEach((bar, index) => {
-        setCounts((prev) => {
-          const updated = [...prev];
-          updated[index] = 0;
-          return updated;
-        });
-
-        const interval = setInterval(() => {
+      const intervals = bars.map((bar, index) => {
+        return setInterval(() => {
           setCounts((prev) => {
             const updated = [...prev];
-            if (updated[index] < bar.percentage) {
-              updated[index] += 1; // Increment the count
-            } else {
-              clearInterval(interval); // Stop the timer once the percentage is reached
-            }
+            if (updated[index] < bar.percentage) updated[index] += 1;
+            else clearInterval(intervals[index]);
             return updated;
           });
-        }, 20); // Speed of the counter
-
-        intervals.push(interval);
+        }, 20);
       });
-
-      return () => {
-        intervals.forEach((interval) => clearInterval(interval));
-      };
+      return () => intervals.forEach(clearInterval);
     }
-  }, [inView, controls]);
+  }, [inView, controls, isMobile]);
 
   return (
-    <div ref={ref} className="relative  bg-gradient-to-br ">
-      <div className="flex flex-col md:flex-row justify-center items-center ">
+    <div ref={ref} className="relative bg-gradient-to-br">
+      <div className="flex flex-col md:flex-row justify-center items-center">
         <div className="flex flex-col items-center md:flex-row md:items-end gap-6 md:max-w-4xl w-full">
           {bars.map((bar, index) => (
             <div
@@ -96,7 +83,7 @@ export default function TokenDistribution() {
               <motion.div
                 className="mb-4 space-y-1"
                 initial={{ opacity: 0, y: 50 }}
-                animate={controls}
+                animate={isMobile ? "visible" : controls}
                 transition={{ delay: index * 0.3, duration: 0.6 }}
                 variants={{
                   visible: { opacity: 1, y: 0 },
@@ -119,7 +106,9 @@ export default function TokenDistribution() {
               <motion.div
                 className="w-full md:w-[200px] bg-gradient-to-t from-[#9999992e] to-white"
                 initial={{ height: 0 }}
-                animate={inView ? { height: bar.height } : { height: 0 }}
+                animate={
+                  inView && !isMobile ? { height: bar.height } : { height: 0 }
+                }
                 transition={{ delay: index * 0.3 + 0.3, duration: 0.6 }}
               />
             </div>
@@ -128,15 +117,13 @@ export default function TokenDistribution() {
 
         <div className="relative w-[600px] h-[600px] md:ml-8 hidden md:block">
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="total-supply-bg w-[450px] h-[450px] rounded-full bg-gradient-to-r from-white/30 to-transparent backdrop-blur-sm flex flex-col items-center justify-center">
-              <div className="total-supply-bg-inner w-[350px] h-[350px] rounded-full bg-gradient-to-r backdrop-blur-sm flex flex-col items-center justify-center">
+            <div className="w-[450px] h-[450px] rounded-full bg-gradient-to-r from-white/30 to-transparent backdrop-blur-sm flex flex-col items-center justify-center">
+              <div className="w-[350px] h-[350px] rounded-full backdrop-blur-sm flex flex-col items-center justify-center">
                 <div className="w-[300px] h-[300px] rounded-full flex flex-col items-center justify-center text-white text-center">
-                  <h1 className="font-bold font-[family-name:var(--font-pixelify-sans)] text-3xl tracking-[0.2em] mb-2">
+                  <h1 className="font-bold text-3xl tracking-[0.2em] mb-2">
                     TOTAL SUPPLY
                   </h1>
-                  <p className="text-4xl tracking-wider font-bold font-[family-name:var(--font-pixelify-sans)]">
-                    1 BILLION
-                  </p>
+                  <p className="text-4xl tracking-wider font-bold">1 BILLION</p>
                 </div>
               </div>
             </div>
