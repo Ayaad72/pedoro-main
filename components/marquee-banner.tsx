@@ -11,7 +11,7 @@ export default function MarqueegBanner() {
         x
       </span>
       <span className="inline-flex items-center text-[#7F1911] text-xl font-medium px-4">
-        fsdfsdf EPIC
+        saasdafa EPIC
       </span>
       <span className="inline-flex items-center text-[#7F1911] text-xl font-medium px-4">
         x
