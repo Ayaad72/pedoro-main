@@ -83,7 +83,7 @@ export const Header = function Navbar() {
                     className="block px-4 py-2 text-lg font-medium text-white hover:text-gray-200 transition-colors duration-200"
                     onClick={() => setIsOpen(false)}
                   >
-                    fsdfdsfsd
+                    asdasdasd
                   </Link>
                   <Link
                     href="#tokenomics"
