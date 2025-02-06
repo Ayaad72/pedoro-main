@@ -20,7 +20,7 @@ export default function Footer() {
       <div className="container mx-auto px-4 py-8 md:py-16 relative z-10">
         <div className="text-center mb-0">
           <h2 className="font-[family-name:var(--font-pixelify-sans)] text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-4">
-            Join qweqweqweq dasdwewqeqw asdasdwerewt
+            dsadasdqweqweq qweqweqweq dasdwewqeqw asdasdwerewt
           </h2>
           <p className="text-white/80 max-w-2xl mx-auto text-base sm:text-lg font-[family-name:var(--font-manrope)] px-4">
             Connect with meme lovers and crypto enthusiasts across the globe and
